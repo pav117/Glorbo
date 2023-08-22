@@ -300,6 +300,7 @@ GameObject:
   - component: {fileID: 27383929}
   - component: {fileID: 27383930}
   - component: {fileID: 27383931}
+  - component: {fileID: 27383932}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -357,6 +358,7 @@ MonoBehaviour:
   sprintSpeed: 10
   slideSpeed: 30
   wallrunSpeed: 8.5
+  climbSpeed: 3
   speedIncreaseMultiplier: 1.5
   slopeIncreaseMultuplier: 2.5
   groundDrag: 4
@@ -372,10 +374,13 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
+  grounded: 0
   maxSlopeAngle: 40
+  climbingScript: {fileID: 27383932}
   orientation: {fileID: 1797426033}
   state: 0
   sliding: 0
+  climbing: 0
   wallrunning: 0
 --- !u!114 &27383930
 MonoBehaviour:
@@ -391,7 +396,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   whatIsWall:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 192
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
@@ -428,6 +433,36 @@ MonoBehaviour:
   slideForce: 200
   slideYScale: 0.5
   slideKey: 306
+--- !u!114 &27383932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27383926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a5a02a889d98e4bb945b59ac91c4d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orientation: {fileID: 1797426033}
+  rb: {fileID: 27383928}
+  pm: {fileID: 27383929}
+  whatIsWall:
+    serializedVersion: 2
+    m_Bits: 128
+  climbSpeed: 10
+  maxClimbTime: 0.75
+  climbJumpUpForce: 14
+  climbJumpBackForce: 12
+  jumpKey: 32
+  climbJumps: 1
+  detectionLength: 0.7
+  sphereCastRadius: 0.25
+  maxWallLookAngle: 30
+  minWallNormalAngleChange: 5
+  exitingWall: 0
+  exitWallTime: 0.2
 --- !u!43 &51889708
 Mesh:
   m_ObjectHideFlags: 0
@@ -1745,7 +1780,7 @@ GameObject:
   - component: {fileID: 603994486}
   - component: {fileID: 603994485}
   - component: {fileID: 603994484}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6869,7 +6904,7 @@ GameObject:
   - component: {fileID: 833310701}
   - component: {fileID: 833310700}
   - component: {fileID: 833310699}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7205,7 +7240,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh23844
+  m_Name: pb_Mesh23878
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7777,7 +7812,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh23776
+  m_Name: pb_Mesh23836
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7972,7 +8007,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh23804
+  m_Name: pb_Mesh23864
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
