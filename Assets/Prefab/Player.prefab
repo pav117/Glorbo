@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2299ebd633525044683c8a9742f4c073, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 7
+  walkSpeed: 10
   sprintSpeed: 10
   slideSpeed: 30
   wallrunSpeed: 8.5
@@ -93,7 +93,7 @@ MonoBehaviour:
   crouchSpeed: 3.5
   crouchYScale: 0.5
   jumpKey: 32
-  sprintKey: 304
+  sprintKey: 278
   crouchKey: 99
   playerHeight: 2
   whatIsGround:
