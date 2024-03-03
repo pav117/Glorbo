@@ -11,6 +11,11 @@ public class PlayerMovement : MonoBehaviour
     public float slideSpeed;
     public float wallrunSpeed;
     public float climbSpeed;
+    public float dashSpeed;
+
+    public float dashSpeedChangeFactor;
+
+    public float maxYSpeed;
 
     private float desiredMoveSpeed;
     private float lastDesiredMoveSpeed;
@@ -69,12 +74,14 @@ public class PlayerMovement : MonoBehaviour
         climbing,
         wallrunning,
         crouching,
+        dashing,
         air
     }
 
     public bool sliding;
     public bool climbing;
     public bool wallrunning;
+    public bool dashing;
     public bool freeze;
     public bool activeGrapple;
 
@@ -100,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
         StateHandler();
 
         // drag
-        if (grounded && !activeGrapple)
+        if (state == MovementState.walking && !activeGrapple || state == MovementState.sprinting && !activeGrapple || state == MovementState.crouching && !activeGrapple)
             rb.drag = groundDrag;
         else
             rb.drag = 0;
@@ -139,10 +146,20 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private MovementState lastState;
+    private bool keepMomentum;
     private void StateHandler()
     {
+        //Mode - Dashing
+        if (dashing)
+        {
+            state = MovementState.dashing;
+            desiredMoveSpeed = dashSpeed;
+            speedChangeFactor = dashSpeedChangeFactor;
+        }
+
         //Mode - Freeze
-        if (freeze)
+        else if (freeze)
         {
             state = MovementState.freeze;
             moveSpeed = 0;
@@ -199,6 +216,11 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             state = MovementState.air;
+
+            if (desiredMoveSpeed < sprintSpeed)
+                desiredMoveSpeed = walkSpeed;
+            else
+                desiredMoveSpeed = sprintSpeed;
         }
 
         //check if desiredMoveSpeed has changed drastically
@@ -211,10 +233,28 @@ public class PlayerMovement : MonoBehaviour
         {
             moveSpeed = desiredMoveSpeed;
         }
+        bool desiredMoveSpeedHasChanged = desiredMoveSpeed != lastDesiredMoveSpeed;
+        if (lastState == MovementState.dashing) keepMomentum = true;
+
+        if (desiredMoveSpeedHasChanged)
+        {
+            if (keepMomentum)
+            {
+                StopAllCoroutines();
+                StartCoroutine(SmoothlyLerpMoveSpeed());
+            }
+            else
+            {
+                StopAllCoroutines();
+                moveSpeed = desiredMoveSpeed;
+            }
+        }
 
         lastDesiredMoveSpeed = desiredMoveSpeed;
+        lastState = state;
     }
 
+    private float speedChangeFactor;
     private IEnumerator SmoothlyLerpMoveSpeed()
     {
         //smoothly lerp movement speed to desired value
@@ -222,9 +262,13 @@ public class PlayerMovement : MonoBehaviour
         float difference = Mathf.Abs(desiredMoveSpeed - moveSpeed);
         float startValue = moveSpeed;
 
+        float boostFactor = speedChangeFactor;
+
         while (time < difference)
         {
             moveSpeed = Mathf.Lerp(startValue, desiredMoveSpeed, time / difference);
+
+            time += Time.deltaTime * boostFactor;
 
             if (OnSlope())
             {
@@ -240,10 +284,14 @@ public class PlayerMovement : MonoBehaviour
         }
 
         moveSpeed = desiredMoveSpeed;
+        speedChangeFactor = 1f;
+        keepMomentum = false;
     }
 
     private void MovePlayer()
     {
+        if (state == MovementState.dashing) return;
+
         if (activeGrapple) return;
 
         if (climbingScript.exitingWall) return;
@@ -294,6 +342,10 @@ public class PlayerMovement : MonoBehaviour
                 rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
             }
         }
+
+        // limit y velocity
+        if (maxYSpeed != 0 && rb.velocity.y > maxYSpeed)
+            rb.velocity = new Vector3(rb.velocity.x, maxYSpeed, rb.velocity.z);
     }
 
     private void Jump()
