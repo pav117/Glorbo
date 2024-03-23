@@ -12,14 +12,24 @@ public class Pulse : MonoBehaviour
         Destroy(gameObject, life);
     }
 
-    void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(collision.transform.name);
-        Target target = collision.transform.GetComponent<Target>();
+        Debug.Log(other.transform.name);
+        Target target = other.transform.GetComponent<Target>();
 
         if (target != null)
         {
             target.TakeDamage(damage);
         }
     }
+ //   void OnCollisionEnter(Collision collision)
+ //   {
+ //       Debug.Log(collision.transform.name);
+   //     Target target = collision.transform.GetComponent<Target>();
+//
+  //      if (target != null)
+ //       {
+  //          target.TakeDamage(damage);
+ //       }
+ //   }
 }

@@ -952,7 +952,7 @@ GameObject:
   - component: {fileID: 470709475}
   - component: {fileID: 470709474}
   - component: {fileID: 470709473}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10679,7 +10679,7 @@ PrefabInstance:
       objectReference: {fileID: 432449975}
     - target: {fileID: 2006867598375802513, guid: 0f100d18b14859543a4788c990e2cec1, type: 3}
       propertyPath: whatIsGrappleable.m_Bits
-      value: 192
+      value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 2946953081415001176, guid: 0f100d18b14859543a4788c990e2cec1, type: 3}
       propertyPath: m_RootOrder
