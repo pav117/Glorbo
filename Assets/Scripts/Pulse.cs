@@ -5,11 +5,19 @@ using UnityEngine;
 public class Pulse : MonoBehaviour
 {
     public float life = 3;
-    public float damage = 10f;
+    public float damage = 40f;
+
+    public RunAndGun runAndGun;
 
     void Awake()
     {
         Destroy(gameObject, life);
+    }
+
+    void Update()
+    {
+        GameObject runAndGunGameObject = GameObject.FindGameObjectWithTag("LevelManager");
+        runAndGun = runAndGunGameObject.GetComponent<RunAndGun>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -20,6 +28,11 @@ public class Pulse : MonoBehaviour
         if (target != null)
         {
             target.TakeDamage(damage);
+            if (runAndGun != null)
+            {
+                runAndGun.energy = runAndGun.energy + 2;
+                print(runAndGun.energy);
+            }
         }
     }
  //   void OnCollisionEnter(Collision collision)

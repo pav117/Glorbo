@@ -3,7 +3,7 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 {
 
-    public float damage = 10f;
+    public float damage = 30f;
     public float range = 100f;
     public float fireRate = 15f;
     public float impactForce = 30f;
@@ -14,9 +14,14 @@ public class Gun : MonoBehaviour
 
     private float nextTimeToFire = 0f;
 
+    public RunAndGun runAndGun;
+
     // Update is called once per frame
     void Update()
     {
+        GameObject runAndGunGameObject = GameObject.FindGameObjectWithTag("LevelManager");
+        runAndGun = runAndGunGameObject.GetComponent<RunAndGun>();
+
         if (Input.GetMouseButton(0) && Time.time >= nextTimeToFire)
         {
             nextTimeToFire = Time.time + 1f / fireRate;
@@ -37,6 +42,11 @@ public class Gun : MonoBehaviour
             if (target != null)
             {
                 target.TakeDamage(damage);
+                if (runAndGun!= null)
+                {
+                    runAndGun.energy = runAndGun.energy + 4;
+                    print(runAndGun.energy);
+                }
             }
 
             if (hit.rigidbody != null)

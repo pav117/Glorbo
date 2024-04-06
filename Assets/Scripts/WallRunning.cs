@@ -45,6 +45,7 @@ public class WallRunning : MonoBehaviour
     public PlayerCameraFPS cam;
     private PlayerMovement pm;
     private Rigidbody rb;
+    public RunAndGun runAndGun;
 
     // Start is called before the first frame update
     private void Start()
@@ -56,6 +57,10 @@ public class WallRunning : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        //top is Run and Gun Stuff
+        GameObject runAndGunGameObject = GameObject.FindGameObjectWithTag("LevelManager");
+        runAndGun = runAndGunGameObject.GetComponent<RunAndGun>();
+
         CheckForWall();
         StateMachine();
     }
@@ -139,6 +144,13 @@ public class WallRunning : MonoBehaviour
         cam.DoFov(90f);
         if (wallLeft) cam.DoTilt(-5f);
         if (wallRight) cam.DoTilt(5f);
+
+        //Run and Gun Energy
+        if (runAndGun != null)
+        {
+            runAndGun.energy = runAndGun.energy + 1;
+            print(runAndGun.energy);
+        }
     }
 
     private void WallRunningMovement()

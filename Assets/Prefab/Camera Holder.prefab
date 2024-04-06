@@ -7432,10 +7432,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ead5c000df99f244fb8e1c26bba69ce2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 30
   range: 100
   fireRate: 1
   impactForce: 30
   fpsCam: {fileID: 7538510004638759492}
   muzzleFlash: {fileID: 3838997552592328514}
   impactEffect: {fileID: 1743301284569550, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
+  runAndGun: {fileID: 0}

@@ -10,6 +10,7 @@ public class Grappling : MonoBehaviour
     public Transform gunTip;
     public LayerMask whatIsGrappleable;
     public LineRenderer lr;
+    public RunAndGun runAndGun;
 
     [Header("Grappling")]
     public float maxGrappleDistance;
@@ -36,6 +37,10 @@ public class Grappling : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        //top is Run and Gun Stuff
+        GameObject runAndGunGameObject = GameObject.FindGameObjectWithTag("LevelManager");
+        runAndGun = runAndGunGameObject.GetComponent<RunAndGun>();
+
         if (Input.GetKeyDown(grappleKey)) StartGrapple();
 
         if (grapplingCdTimer > 0)
@@ -88,6 +93,13 @@ public class Grappling : MonoBehaviour
         pm.JumpToPosition(grapplePoint, highestPointOnArc);
 
         Invoke(nameof(StopGrapple), 1f);
+
+        //Run and Gun Energy
+        if (runAndGun != null)
+        {
+            runAndGun.energy = runAndGun.energy + 1;
+            print(runAndGun.energy);
+        }
     }
 
     public void StopGrapple()

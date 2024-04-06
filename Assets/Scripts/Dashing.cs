@@ -9,6 +9,7 @@ public class Dashing : MonoBehaviour
     public Transform playerCam;
     private Rigidbody rb;
     private PlayerMovement pm;
+    public RunAndGun runAndGun;
 
     [Header("Dashing")]
     public float dashForce;
@@ -41,6 +42,10 @@ public class Dashing : MonoBehaviour
 
     private void Update()
     {
+        //top is Run and Gun Stuff
+        GameObject runAndGunGameObject = GameObject.FindGameObjectWithTag("LevelManager");
+        runAndGun = runAndGunGameObject.GetComponent<RunAndGun>();
+
         if (Input.GetKeyDown(dashKey))
             Dash();
 
@@ -76,6 +81,13 @@ public class Dashing : MonoBehaviour
         Invoke(nameof(DelayedDashForce), 0.025f);
 
         Invoke(nameof(ResetDash), dashDuration);
+
+        //Run and Gun Energy
+        if (runAndGun != null)
+        {
+            runAndGun.energy = runAndGun.energy + 1;
+            print(runAndGun.energy);
+        }
     }
 
     private Vector3 delayedForceToApply;
