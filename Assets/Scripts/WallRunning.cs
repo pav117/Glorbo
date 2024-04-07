@@ -146,7 +146,7 @@ public class WallRunning : MonoBehaviour
         if (wallRight) cam.DoTilt(5f);
 
         //Run and Gun Energy
-        if (runAndGun != null)
+        if (runAndGun != null && !runAndGun.UIElement.activeInHierarchy)
         {
             runAndGun.energy = runAndGun.energy + 1;
             print(runAndGun.energy);

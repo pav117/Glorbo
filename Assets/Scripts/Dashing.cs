@@ -83,7 +83,7 @@ public class Dashing : MonoBehaviour
         Invoke(nameof(ResetDash), dashDuration);
 
         //Run and Gun Energy
-        if (runAndGun != null)
+        if (runAndGun != null && !runAndGun.UIElement.activeInHierarchy)
         {
             runAndGun.energy = runAndGun.energy + 1;
             print(runAndGun.energy);

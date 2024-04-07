@@ -41,11 +41,18 @@ public class Gun : MonoBehaviour
             Target target = hit.transform.GetComponent<Target>();
             if (target != null)
             {
-                target.TakeDamage(damage);
-                if (runAndGun!= null)
+                if (!runAndGun.UIElement.activeInHierarchy)
                 {
-                    runAndGun.energy = runAndGun.energy + 4;
-                    print(runAndGun.energy);
+                    target.TakeDamage(damage);
+                    if (runAndGun != null)
+                    {
+                        runAndGun.energy = runAndGun.energy + 2;
+                        print(runAndGun.energy);
+                    }
+                }
+                if (runAndGun.UIElement.activeInHierarchy)
+                {
+                    target.TakeDamage(damage * 2f);
                 }
             }
 

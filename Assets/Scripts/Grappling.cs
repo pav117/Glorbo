@@ -95,7 +95,7 @@ public class Grappling : MonoBehaviour
         Invoke(nameof(StopGrapple), 1f);
 
         //Run and Gun Energy
-        if (runAndGun != null)
+        if (runAndGun != null && !runAndGun.UIElement.activeInHierarchy)
         {
             runAndGun.energy = runAndGun.energy + 1;
             print(runAndGun.energy);
