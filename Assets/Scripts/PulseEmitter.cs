@@ -10,6 +10,9 @@ public class PulseEmitter : MonoBehaviour
     public float fireRate = 15f;
 
     private float nextTimeToFire = 0f;
+
+    public Rigidbody rb;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,10 +22,13 @@ public class PulseEmitter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(0) && Time.time >= nextTimeToFire)
+        if (rb.velocity.magnitude > 0)
         {
-            nextTimeToFire = Time.time + 1f / fireRate;
-            Shoot();
+            if (Input.GetMouseButton(0) && Time.time >= nextTimeToFire)
+            {
+                nextTimeToFire = Time.time + 1f / fireRate;
+                Shoot();
+            }
         }
     }
 

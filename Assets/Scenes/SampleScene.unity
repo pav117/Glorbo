@@ -10171,6 +10171,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5789978767622793736, guid: 0f100d18b14859543a4788c990e2cec1, type: 3}
   m_PrefabInstance: {fileID: 4591221417756215119}
   m_PrefabAsset: {fileID: 0}
+--- !u!54 &1328533325 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 6373536272960330543, guid: 0f100d18b14859543a4788c990e2cec1, type: 3}
+  m_PrefabInstance: {fileID: 4591221417756215119}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1352489712
 GameObject:
   m_ObjectHideFlags: 0
@@ -12280,6 +12285,10 @@ PrefabInstance:
       value: 2934
       objectReference: {fileID: 0}
     - target: {fileID: 5948652858676179349, guid: 89b23d3f9f05612428417a0be9c97a8d, type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 1328533325}
+    - target: {fileID: 5948652858676179349, guid: 89b23d3f9f05612428417a0be9c97a8d, type: 3}
       propertyPath: PulseSpeed
       value: 10
       objectReference: {fileID: 0}
@@ -12323,6 +12332,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 699922451}
+    - target: {fileID: 8069571952981512525, guid: 89b23d3f9f05612428417a0be9c97a8d, type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 1328533325}
     - target: {fileID: 8069571952981512525, guid: 89b23d3f9f05612428417a0be9c97a8d, type: 3}
       propertyPath: damage
       value: 30

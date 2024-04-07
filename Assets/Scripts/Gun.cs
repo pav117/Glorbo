@@ -15,6 +15,7 @@ public class Gun : MonoBehaviour
     private float nextTimeToFire = 0f;
 
     public RunAndGun runAndGun;
+    public Rigidbody rb;
 
     // Update is called once per frame
     void Update()
@@ -22,10 +23,13 @@ public class Gun : MonoBehaviour
         GameObject runAndGunGameObject = GameObject.FindGameObjectWithTag("LevelManager");
         runAndGun = runAndGunGameObject.GetComponent<RunAndGun>();
 
-        if (Input.GetMouseButton(0) && Time.time >= nextTimeToFire)
+        if (rb.velocity.magnitude > 0)
         {
-            nextTimeToFire = Time.time + 1f / fireRate;
-            Shoot();
+            if (Input.GetMouseButton(0) && Time.time >= nextTimeToFire)
+            {
+                nextTimeToFire = Time.time + 1f / fireRate;
+                Shoot();
+            }
         }
     }
 
