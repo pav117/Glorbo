@@ -43,6 +43,7 @@ public class Gun : MonoBehaviour
             Debug.Log(hit.transform.name);
 
             Target target = hit.transform.GetComponent<Target>();
+            TutorialRaGBallHealth ballRaG = hit.transform.GetComponent<TutorialRaGBallHealth>();
             if (target != null)
             {
                 if (!runAndGun.UIElement.activeInHierarchy)
@@ -57,6 +58,14 @@ public class Gun : MonoBehaviour
                 if (runAndGun.UIElement.activeInHierarchy)
                 {
                     target.TakeDamage(damage * 2f);
+                }
+            }
+
+            if (ballRaG != null)
+            {
+                if (runAndGun.UIElement.activeInHierarchy)
+                {
+                    ballRaG.TakeDamage(damage * 2f);
                 }
             }
 

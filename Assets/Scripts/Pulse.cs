@@ -24,6 +24,7 @@ public class Pulse : MonoBehaviour
     {
         Debug.Log(other.transform.name);
         Target target = other.transform.GetComponent<Target>();
+        TutorialRaGBallHealth ballRaG = other.transform.GetComponent<TutorialRaGBallHealth>();
 
         if (target != null)
         {
@@ -39,6 +40,14 @@ public class Pulse : MonoBehaviour
             if (runAndGun.UIElement.activeInHierarchy)
             {
                 target.TakeDamage(damage * 2f);
+            }
+        }
+
+        if (ballRaG != null)
+        {
+            if (runAndGun.UIElement.activeInHierarchy)
+            {
+                ballRaG.TakeDamage(damage * 2f);
             }
         }
     }

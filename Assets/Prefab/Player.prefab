@@ -128,7 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   whatIsWall:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 128
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
@@ -147,6 +147,7 @@ MonoBehaviour:
   gravityCounterForce: 5
   orientation: {fileID: 4460173923184623920}
   cam: {fileID: 0}
+  runAndGun: {fileID: 0}
 --- !u!114 &2759977231142275362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,6 +214,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   lr: {fileID: 0}
+  runAndGun: {fileID: 0}
   maxGrappleDistance: 25
   grappleDelayTime: 0.25
   overshootYAxis: 2
@@ -232,6 +234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orientation: {fileID: 4460173923184623920}
   playerCam: {fileID: 0}
+  runAndGun: {fileID: 0}
   dashForce: 20
   dashUpwardForce: 0
   maxDashYSpeed: 15
