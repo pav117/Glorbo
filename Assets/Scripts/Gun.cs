@@ -44,6 +44,10 @@ public class Gun : MonoBehaviour
 
             Target target = hit.transform.GetComponent<Target>();
             TutorialRaGBallHealth ballRaG = hit.transform.GetComponent<TutorialRaGBallHealth>();
+            WeakPointHPNorm weakPoint = hit.transform.GetComponent<WeakPointHPNorm>();
+            WeakPointAbsorb absorbPoint = hit.transform.GetComponent<WeakPointAbsorb>();
+            AbsorberHealth absorbDmg = hit.transform.GetComponent<AbsorberHealth>();
+
             if (target != null)
             {
                 if (!runAndGun.UIElement.activeInHierarchy)
@@ -66,6 +70,34 @@ public class Gun : MonoBehaviour
                 if (runAndGun.UIElement.activeInHierarchy)
                 {
                     ballRaG.TakeDamage(damage * 2f);
+                }
+            }
+
+            if (weakPoint != null)
+            {
+                weakPoint.TakeDamage(damage * 1.5f);
+                if (runAndGun != null && !runAndGun.UIElement.activeInHierarchy)
+                {
+                    runAndGun.energy = runAndGun.energy + 2;
+                    print(runAndGun.energy);
+                }
+            }
+
+            if (absorbPoint != null)
+            {
+                absorbPoint.TakeDamage(damage * 1.5f);
+                if (runAndGun != null && !runAndGun.UIElement.activeInHierarchy)
+                {
+                    runAndGun.energy = runAndGun.energy + 2;
+                    print(runAndGun.energy);
+                }
+            }
+
+            if (absorbDmg != null)
+            {
+                if (runAndGun.UIElement.activeInHierarchy)
+                {
+                    absorbDmg.TakeDamage(damage * 4f);
                 }
             }
 

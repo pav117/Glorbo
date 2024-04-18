@@ -25,6 +25,9 @@ public class Pulse : MonoBehaviour
         Debug.Log(other.transform.name);
         Target target = other.transform.GetComponent<Target>();
         TutorialRaGBallHealth ballRaG = other.transform.GetComponent<TutorialRaGBallHealth>();
+        WeakPointHPNorm weakPoint = other.transform.GetComponent<WeakPointHPNorm>();
+        WeakPointAbsorb absorbPoint = other.transform.GetComponent<WeakPointAbsorb>();
+        AbsorberHealth absorbDmg = other.transform.GetComponent<AbsorberHealth>();
 
         if (target != null)
         {
@@ -48,6 +51,34 @@ public class Pulse : MonoBehaviour
             if (runAndGun.UIElement.activeInHierarchy)
             {
                 ballRaG.TakeDamage(damage * 2f);
+            }
+        }
+
+        if (weakPoint != null)
+        {
+            weakPoint.TakeDamage(damage * 1.5f);
+            if (runAndGun != null && !runAndGun.UIElement.activeInHierarchy)
+            {
+                runAndGun.energy = runAndGun.energy + 2;
+                print(runAndGun.energy);
+            }
+        }
+
+        if (absorbPoint != null)
+        {
+            absorbPoint.TakeDamage(damage * 1.5f);
+            if (runAndGun != null && !runAndGun.UIElement.activeInHierarchy)
+            {
+                runAndGun.energy = runAndGun.energy + 2;
+                print(runAndGun.energy);
+            }
+        }
+
+        if (absorbDmg != null)
+        {
+            if (runAndGun.UIElement.activeInHierarchy)
+            {
+                absorbDmg.TakeDamage(damage * 2f);
             }
         }
     }
