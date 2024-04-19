@@ -18,7 +18,9 @@ public class EnemyAI : MonoBehaviour
     //Attacking
     public float timeBetweenAttacks;
     bool alreadyAttacked;
-    public GameObject projectile;
+    public GameObject projectilePrefab;
+    public Transform projectileSpawnPoint;
+    public float projectileSpeed;
 
     //States
     public float sightRange, attackRange;
@@ -81,9 +83,8 @@ public class EnemyAI : MonoBehaviour
         if (!alreadyAttacked)
         {
             //Attacks
-            Rigidbody rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
-            rb.AddForce(transform.up * 8f, ForceMode.Impulse);
+            var projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
+            projectile.GetComponent<Rigidbody>().velocity = projectileSpawnPoint.forward * projectileSpeed;
 
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
