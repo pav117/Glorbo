@@ -7,6 +7,8 @@ public class UITips : MonoBehaviour
     public GameObject Tips;
     public GameObject FirstTimeCheck;
 
+    public int time = 3;
+
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -22,7 +24,7 @@ public class UITips : MonoBehaviour
     {
         FirstTimeCheck.SetActive(true);
         Tips.SetActive(true);
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(time);
         Tips.SetActive(false);
     }
 }

@@ -8,6 +8,7 @@ public class ActivateAll : MonoBehaviour
     public GameObject item2;
 
     public GameObject somethingHappens;
+    public GameObject somethingHappens2;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +22,7 @@ public class ActivateAll : MonoBehaviour
         if (item1.activeInHierarchy && item2.activeInHierarchy)
         {
             somethingHappens.SetActive(false);
+            somethingHappens2.SetActive(true);
         }
     }
 }
